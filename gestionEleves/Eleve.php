@@ -116,14 +116,3 @@ class Eleve
         return $this;
     }
 }
-
-
-// Test moyenne
-// // Créer une instance de la classe Eleve
-// $eleve = new Eleve("John Doe", [20, 10], null, 1);
-// $eleve->setMoyenne(null);
-
-// // Calculer et définir la moyenne
-// // Obtenir la moyenne calculée
-// $moyenneCalculee = $eleve->getMoyenne();
-// echo "La moyenne calculée est : " . $moyenneCalculee . PHP_EOL;
