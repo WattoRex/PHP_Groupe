@@ -1,6 +1,7 @@
 <?php
-include_once("./gestionEleves/Eleve.php");
+include_once("./gestionEleves/Eleve.php"); // Inclure la classe Eleve depuis le chemin spécifié
 
+// Fonction pour saisir les données d'un élève
 function saisirDonneesEleve(): Eleve
 {
     while (true) {
@@ -10,7 +11,7 @@ function saisirDonneesEleve(): Eleve
         $nom = trim($nom);
 
         if (!empty($nom) && preg_match('/^[a-zA-Z]+$/', $nom)) {
-            break;
+            break; // Sortir de la boucle si le nom est valide
         } else {
             echo "Veuillez entrer un nom valide (contenant uniquement des lettres et non vide)." . PHP_EOL;
         }
@@ -21,7 +22,7 @@ function saisirDonneesEleve(): Eleve
         $note = readline("Entrez une note (ou 'q' pour quitter) : ");
 
         if ($note === 'q') {
-            break;
+            break; // Sortir de la boucle si l'utilisateur entre 'q'
         }
 
         $note = trim($note); // Supprimer les espaces éventuels avant et après la saisie
@@ -30,7 +31,7 @@ function saisirDonneesEleve(): Eleve
             $note = (int) $note;
 
             if ($note >= 0 && $note <= 20) {
-                $listeNotes[] = $note;
+                $listeNotes[] = $note; // Ajouter la note à la liste si elle est valide
             } else {
                 echo "La note doit être comprise entre 0 et 20." . PHP_EOL;
             }
@@ -39,22 +40,21 @@ function saisirDonneesEleve(): Eleve
         }
     }
 
-    $eleve = new Eleve($nom, $listeNotes, null, 0);
-    $eleve->getMoyenne();
-    $eleve->setMoyenne(null);
-    return $eleve;
+    $eleve = new Eleve($nom, $listeNotes, null, 0); // Créer un objet Eleve avec les données saisies
+    $eleve->getMoyenne(); // Calculer la moyenne de l'élève 
+    $eleve->setMoyenne(null); // Définir la moyenne 
+    return $eleve; // Retourner l'objet Eleve créé
 }
 
-// Saisir les données pour plusieurs élèves
-$eleves = [];
+$eleves = []; // Tableau pour stocker les objets Eleve saisis
 
 while (true) {
-    $eleve = saisirDonneesEleve();
-    $eleves[] = $eleve;
+    $eleve = saisirDonneesEleve(); // Appeler la fonction pour saisir les données de l'élève
+    $eleves[] = $eleve; // Ajouter l'objet Eleve au tableau
 
     $continuer = readline("Voulez-vous saisir les données d'un autre élève ? (o/n) : ");
     if ($continuer !== 'o') {
-        break;
+        break; // Sortir de la boucle si l'utilisateur n'entre pas 'o'
     }
 }
 
@@ -64,3 +64,4 @@ foreach ($eleves as $eleve) {
     echo "Moyenne : " . $eleve->getMoyenne() . PHP_EOL;
     echo "-----------------------" . PHP_EOL;
 }
+?>
