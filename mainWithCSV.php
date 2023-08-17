@@ -1,5 +1,6 @@
 <?php
 include_once("./gestionEleves/Eleve.php"); // Inclure la classe Eleve depuis le chemin spécifié
+include_once("./lib/index.php");
 
 $elevesData = []; // Tableau pour stocker les objets Eleve saisis
 
@@ -20,36 +21,6 @@ while (true) {
 
 // Écrire les données des élèves dans un fichier CSV
 $csvFileName = "Eleve.csv";
-$csvFile = fopen($csvFileName, 'a');
+writeDataToCSV($csvFileName, $elevesData);
 
-// Vérifier si le fichier est vide (nouveau fichier)
-$fileIsEmpty = filesize($csvFileName) === 0;
-if ($fileIsEmpty) {
-    fputcsv($csvFile, array_keys($elevesData[0])); // Écrire l'en-tête du CSV
-}
-
-foreach ($elevesData as $eleveData) {
-    fputcsv($csvFile, $eleveData); // Écrire les données de chaque élève dans le CSV
-}
-
-fclose($csvFile);
-
-echo "Les données des élèves ont été sauvegardées dans le fichier $csvFileName." . PHP_EOL;
-
-// Vérifier si le fichier existe avant de l'ouvrir
-if (file_exists($csvFileName)) {
-    $csvFile = fopen($csvFileName, 'r');
-
-    // Lire et afficher chaque ligne du fichier CSV
-    while (($data = fgetcsv($csvFile)) !== false) {
-        // Afficher les données de chaque ligne
-        foreach ($data as $value) {
-            echo $value . ' ';
-        }
-        echo PHP_EOL;
-    }
-
-    fclose($csvFile);
-} else {
-    echo "Le fichier $csvFileName n'existe pas." . PHP_EOL;
-}
+readCSVAndDisplay($csvFileName);
