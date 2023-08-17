@@ -5,9 +5,10 @@ function readCSVAndDisplay($csvFileName)
         $csvFile = fopen($csvFileName, 'r');
 
         while (($data = fgetcsv($csvFile)) !== false) {
-            echo "Nom : " . $data[0] . PHP_EOL;
-            echo "Moyenne : " . $data[1] . PHP_EOL;
-            echo "-----------------" . PHP_EOL;
+            foreach ($data as $value) {
+                echo $value . ' ';
+            }
+            echo PHP_EOL;
         }
 
         fclose($csvFile);
