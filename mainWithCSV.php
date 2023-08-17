@@ -1,6 +1,7 @@
 <?php
 include_once("./gestionEleves/Eleve.php"); // Inclure la classe Eleve depuis le chemin spécifié
 include_once("./lib/index.php");
+include_once("./lecture.php");
 
 $elevesData = []; // Tableau pour stocker les objets Eleve saisis
 
@@ -24,3 +25,4 @@ $csvFileName = "Eleve.csv";
 writeDataToCSV($csvFileName, $elevesData);
 
 readCSVAndDisplay($csvFileName);
+readCSVAndDisplay1($csvFileName);
