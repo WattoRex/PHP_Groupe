@@ -1,14 +1,16 @@
 <?php
 // Fonction pour lire et afficher les données d'un fichier csv
-function readCSVAndDisplay1($csvFileName) {
+function readCSVAndDisplay1($csvFileName)
+{
     echo "Lecture des données à partir du fichier CSV " . PHP_EOL;
     $csvFileName = fopen($csvFileName, "r");
-    fgetcsv($csvFileName); 
+    fgetcsv($csvFileName);
 
-    while (($ligne = fgetcsv($csvFileName)) !== false) {
-        echo "Nom : " . $ligne[0] . PHP_EOL;
-        echo "Moyenne : " . $ligne[1] . PHP_EOL;
-        echo "-----------------" . PHP_EOL;
+    while (($data = fgetcsv($csvFileName)) !== false) {
+        foreach ($data as $value) {
+            echo $value . ' ';
+        }
+        echo PHP_EOL;
     }
 
     fclose($csvFileName);
